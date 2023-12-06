@@ -1,0 +1,2 @@
+F:\Documents\Development\Advent of Code\advent-of-code\AdventOfCode\Day2\obj\Debug\Day2.csproj.AssemblyReference.cache
+F:\Documents\Development\Advent of Code\advent-of-code\AdventOfCode\Day2\obj\Debug\Day2.csproj.CoreCompileInputs.cache

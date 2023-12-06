@@ -6,11 +6,11 @@ using System.Text.RegularExpressions;
 
 namespace Day2
 {
-   internal class Program
+    internal class Program
     {
         private const string InputFileName = "Input";
         
-        public static void Main()
+        public static void Main(string[] args)
         {
             List<GameResult> games = new List<GameResult>();
             
@@ -65,18 +65,35 @@ namespace Day2
             for (var i = 0; i < games.Count; i++)
             {
                 var currentGame = games[i];
+
                 
+                /*var maxPossibleBlue = 14;
+                var maxPossibleRed = 12;
+                var maxPossibleGreen = 13;
+
+                if (currentGame.maxCountedBlueCubesInSet <=maxPossibleBlue
+                    && currentGame.maxCountedGreenCubesInSet <= maxPossibleGreen
+                    && currentGame.maxCountedRedCubesInSet <= maxPossibleRed)
+                    idSums += i + 1;*/
+
                 var cubePower = currentGame.maxCountedBlueCubesInSet 
                                 * currentGame.maxCountedRedCubesInSet
                                 * currentGame.maxCountedGreenCubesInSet;
 
                 cubePowerSum += cubePower;
+
+
+                /*var gameResult = games[i];
+                Console.WriteLine("Game Results:\n" +
+                                  $"Max Blue Cubes: {gameResult.maxBlueCubes}\n" +
+                                  $"Max Red Cubes: {gameResult.maxRedCubes}\n" +
+                                  $"Max Green Cubes: {gameResult.maxGreenCubes}\n");*/
             }
             
             Console.WriteLine(cubePowerSum);
         }
     }
-
+    
     public struct GameResult
     {
         public int maxCountedRedCubesInSet;
