@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.IO.Pipes;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -84,40 +82,6 @@ namespace Day3
             }
 
             Console.Write(enginePartSum);
-        }
-        
-        private static bool IsSpecialCharacter(char c)
-        {
-            return !regexNumberOrPeriod.IsMatch(c.ToString());
-            /*string pattern = 
-            Regex numericalRegEx = new Regex("\\d");
-            Regex periodCharacterRegex = new Regex("\\.");
-
-            return !numericalRegEx.IsMatch(c.ToString()) && !periodCharacterRegex.IsMatch(c.ToString());*/
-        }
-
-        private static bool IsAdjacentToSymbol(string[] inputLines, int lineIndex, int startIndex, int endIndex)
-        {
-            var lineLength = inputLines[0].Length;
-            var searchStartIndex = startIndex == 0 ? 0 : startIndex - 1;
-            // var searchLength = (endIndex == lineLength - 1 ? endIndex : endIndex + 1) - searchStartIndex;
-            var searchLength = (endIndex + 1) - searchStartIndex;
-
-            string lineUp = "";
-            string lineDown = "";
-
-            var currentLine = inputLines[lineIndex].Substring(searchStartIndex, searchLength);
-            
-            if (lineIndex != 0) 
-                lineUp = inputLines[lineIndex - 1].Substring(searchStartIndex, searchLength);
-
-            if (lineIndex + 1 < inputLines.Length)
-                lineDown = inputLines[lineIndex + 1].Substring(searchStartIndex, searchLength);
-
-            if (string.Concat(lineUp, lineDown, currentLine).Any(IsSpecialCharacter))
-                return true;
-            
-            return false;
         }
     }
 
