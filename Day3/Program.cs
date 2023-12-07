@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -9,85 +10,90 @@ namespace Day3
     internal class Program
     {
         private const string InputFileName = "Input";
+        private static readonly Regex regexNumberOrPeriod = new Regex(@"^(?=\d)(?=\.)");
+        
         // private static readonly char[] SpecialCharacters = new char[]{'*', '#', '+', '$', '&'};
         
         public static void Main(string[] args)
         {
-            var inputLines = File.ReadAllLines(InputFileName);
-            int enginePartSum = 0;
-            
-            // Get first and last index of number
-            for (int lineIndex = 0; lineIndex < inputLines.Length; lineIndex++)
+            var lines = File.ReadAllLines(InputFileName);
+            var width = lines[0].Length;
+            var height = lines.Length;
+
+            // Store input in a dual char array. This makes is easier to understand the symbols
+            // around a number after we've identified the start/end of a number
+            var charMap = new char[width, height];
+            for (var x = 0; x < width; x++)
             {
-                var line = inputLines[lineIndex];
-                var listOfValidNumbersInCurrentLine = new List<int>();
-                
-                // Does this line contain any digits
-                int firstDigitIndex = 0;
-                int lastDigitIndex = 0;
-
-                firstDigitIndex = TryGetFirstDigitInString(line, lastDigitIndex);
-                if (firstDigitIndex == -1)
-                    continue;
-                    
-                for (int i = firstDigitIndex + 1; i <= line.Length; i++)
+                for (var y = 0; y < height; y++)
                 {
-                    if (!char.IsDigit(line[i]) || (char.IsDigit(line[i]) && i == line.Length))
-                    {
-                        lastDigitIndex = i;
+                    charMap[x, y] = lines[y][x];
+                }
+            }
 
-                        if (IsAdjacentToSymbol(inputLines, lineIndex, firstDigitIndex, lastDigitIndex))
+            var enginePartSum = 0;
+            var currentNumber = 0;
+            var isNumberAdjacentToSymbol = false;
+            
+            for (int y = 0; y < height; y++)
+            {
+                void EndCurrentNumber()
+                {
+                    if (currentNumber != 0 && isNumberAdjacentToSymbol)
+                    {
+                        enginePartSum += currentNumber;
+                    }
+
+                    currentNumber = 0;
+                    isNumberAdjacentToSymbol = false;
+                }
+                
+                for (int x = 0; x < width; x++)
+                {
+                    // check if we are reading a number
+                    var currentChar = charMap[x, y];
+                    if (char.IsDigit(currentChar))
+                    {
+                        var characterValue = currentChar - '0';
+                        currentNumber = currentNumber * 10 + characterValue;
+                        foreach (var (xCord, yCord) in Directions.WithDiagonals)
                         {
-                            var numberString = line.Substring(firstDigitIndex, lastDigitIndex - firstDigitIndex);
-                            var numberFound = Int32.Parse(numberString);
-                            enginePartSum += numberFound;
-                            listOfValidNumbersInCurrentLine.Add(numberFound);
+                            var neighborX = x + xCord;
+                            var neighborY = y + yCord;
+                            if (neighborX < 0 || neighborX >= width || neighborY < 0 || neighborY >= height)
+                                continue;
+
+                            var neighborCharacter = charMap[neighborX, neighborY];
+
+                            var regexNumber = new Regex("\\d");
+                            var regexPeriod = new Regex("\\.");
+                            var stringToMatch = neighborCharacter.ToString();
+                            
+                            if (!regexNumber.IsMatch(stringToMatch) && !regexPeriod.IsMatch(stringToMatch))
+                                isNumberAdjacentToSymbol = true;
                         }
-                        
-                        // Try to see if there are still more digits in the strings
-                        firstDigitIndex = TryGetFirstDigitInString(line, lastDigitIndex);
-                        
-                        if (firstDigitIndex == -1)
-                            break;
-                        
-                        i = firstDigitIndex;
+                    }
+                    else
+                    {
+                        // we've encountered a non-digit
+                        EndCurrentNumber();
                     }
                 }
-
-                var lineReport = $"The valid number in line {lineIndex + 1} are: ";
-                foreach (var validNumber in listOfValidNumbersInCurrentLine)
-                {
-                    lineReport += $"| {validNumber} |";
-                }
                 
-                Console.WriteLine($"{lineReport}");
+                EndCurrentNumber();
+            }
 
-            }
-            
-            Console.WriteLine($"Engine Part Sum is {enginePartSum}");
-        }
-
-        private static int TryGetFirstDigitInString(string inputString, int startIndex)
-        {
-            try
-            {
-                var subString = inputString.Substring(startIndex);
-                var firstFoundDigit = subString.First(char.IsDigit);
-                var indexOfFoundDigit = subString.IndexOf(firstFoundDigit);
-                return indexOfFoundDigit + startIndex;
-            }
-            catch (InvalidOperationException e)
-            {
-                return -1;
-            }
+            Console.Write(enginePartSum);
         }
         
         private static bool IsSpecialCharacter(char c)
         {
+            return !regexNumberOrPeriod.IsMatch(c.ToString());
+            /*string pattern = 
             Regex numericalRegEx = new Regex("\\d");
             Regex periodCharacterRegex = new Regex("\\.");
 
-            return !numericalRegEx.IsMatch(c.ToString()) && !periodCharacterRegex.IsMatch(c.ToString());
+            return !numericalRegEx.IsMatch(c.ToString()) && !periodCharacterRegex.IsMatch(c.ToString());*/
         }
 
         private static bool IsAdjacentToSymbol(string[] inputLines, int lineIndex, int startIndex, int endIndex)
@@ -113,5 +119,20 @@ namespace Day3
             
             return false;
         }
+    }
+
+    public static class Directions
+    {
+        public static (int, int)[] WithDiagonals = new(int, int) []
+        {
+            (0, 1),
+            (1, 0),
+            (0, -1),
+            (-1, 0),
+            (1, 1),
+            (-1, 1),
+            (1, -1),
+            (-1, -1)
+        };
     }
 }
