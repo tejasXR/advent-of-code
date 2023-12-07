@@ -13,3 +13,10 @@ C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\ob
 C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.csproj.CoreCompileInputs.cache
 C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.exe
 C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.pdb
+F:\Documents\Development\Advent of Code\advent-of-code\Day3\bin\Debug\Input
+F:\Documents\Development\Advent of Code\advent-of-code\Day3\bin\Debug\Day3.exe
+F:\Documents\Development\Advent of Code\advent-of-code\Day3\bin\Debug\Day3.pdb
+F:\Documents\Development\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.csproj.AssemblyReference.cache
+F:\Documents\Development\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.csproj.CoreCompileInputs.cache
+F:\Documents\Development\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.exe
+F:\Documents\Development\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.pdb

@@ -20,6 +20,7 @@ namespace Day3
             for (int lineIndex = 0; lineIndex < inputLines.Length; lineIndex++)
             {
                 var line = inputLines[lineIndex];
+                var listOfValidNumbersInCurrentLine = new List<int>();
                 
                 // Does this line contain any digits
                 int firstDigitIndex = 0;
@@ -29,9 +30,9 @@ namespace Day3
                 if (firstDigitIndex == -1)
                     continue;
                     
-                for (int i = firstDigitIndex + 1; i < line.Length; i++)
+                for (int i = firstDigitIndex + 1; i <= line.Length; i++)
                 {
-                    if (!char.IsDigit(line[i]))
+                    if (!char.IsDigit(line[i]) || (char.IsDigit(line[i]) && i == line.Length))
                     {
                         lastDigitIndex = i;
 
@@ -40,6 +41,7 @@ namespace Day3
                             var numberString = line.Substring(firstDigitIndex, lastDigitIndex - firstDigitIndex);
                             var numberFound = Int32.Parse(numberString);
                             enginePartSum += numberFound;
+                            listOfValidNumbersInCurrentLine.Add(numberFound);
                         }
                         
                         // Try to see if there are still more digits in the strings
@@ -51,32 +53,18 @@ namespace Day3
                         i = firstDigitIndex;
                     }
                 }
+
+                var lineReport = $"The valid number in line {lineIndex + 1} are: ";
+                foreach (var validNumber in listOfValidNumbersInCurrentLine)
+                {
+                    lineReport += $"| {validNumber} |";
+                }
+                
+                Console.WriteLine($"{lineReport}");
+
             }
             
             Console.WriteLine($"Engine Part Sum is {enginePartSum}");
-
-            // Get where the special characters are
-            /*for (int lineIndex = 0; lineIndex < inputLines.Length; lineIndex++)
-            {
-                var line = inputLines[lineIndex];
-                if (line.Any(IsSpecialCharacter))
-                {
-                    var tempString = line;
-                    while (tempString.Any(IsSpecialCharacter))
-                    {
-                        var foundChar = tempString.First(IsSpecialCharacter);
-                        var indexOfFoundChar = tempString.IndexOf(foundChar);
-                        tempString = tempString.Remove(0, indexOfFoundChar + 1);
-                        
-                        specialCharacterIndexByLineIndex.Add((lineIndex, indexOfFoundChar));
-                    }
-                }
-            }
-
-            foreach (var (lineIndex, stringIndex) in specialCharacterIndexByLineIndex)
-            {
-                Console.WriteLine($"Found special character at line index {lineIndex}, and string index {stringIndex}");
-            }*/
         }
 
         private static int TryGetFirstDigitInString(string inputString, int startIndex)
@@ -84,7 +72,9 @@ namespace Day3
             try
             {
                 var subString = inputString.Substring(startIndex);
-                return inputString.IndexOf(subString.First(char.IsDigit));
+                var firstFoundDigit = subString.First(char.IsDigit);
+                var indexOfFoundDigit = subString.IndexOf(firstFoundDigit);
+                return indexOfFoundDigit + startIndex;
             }
             catch (InvalidOperationException e)
             {
@@ -94,17 +84,18 @@ namespace Day3
         
         private static bool IsSpecialCharacter(char c)
         {
-            string regexPattern = "";
-            Regex regex = new Regex(regexPattern);
-            return regex.IsMatch(c.ToString());
-            // return SpecialCharacters.Contains(c);
+            Regex numericalRegEx = new Regex("\\d");
+            Regex periodCharacterRegex = new Regex("\\.");
+
+            return !numericalRegEx.IsMatch(c.ToString()) && !periodCharacterRegex.IsMatch(c.ToString());
         }
 
         private static bool IsAdjacentToSymbol(string[] inputLines, int lineIndex, int startIndex, int endIndex)
         {
             var lineLength = inputLines[0].Length;
             var searchStartIndex = startIndex == 0 ? 0 : startIndex - 1;
-            var searchLength = (endIndex == lineLength - 1 ? endIndex : endIndex + 1) - searchStartIndex;
+            // var searchLength = (endIndex == lineLength - 1 ? endIndex : endIndex + 1) - searchStartIndex;
+            var searchLength = (endIndex + 1) - searchStartIndex;
 
             string lineUp = "";
             string lineDown = "";
