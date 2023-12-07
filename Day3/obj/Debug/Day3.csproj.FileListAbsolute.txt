@@ -5,3 +5,11 @@ F:\Documents\Development\Advent of Code\advent-of-code\AdventOfCode\Day3\obj\Deb
 F:\Documents\Development\Advent of Code\advent-of-code\AdventOfCode\Day3\obj\Debug\Day3.csproj.CoreCompileInputs.cache
 F:\Documents\Development\Advent of Code\advent-of-code\AdventOfCode\Day3\obj\Debug\Day3.exe
 F:\Documents\Development\Advent of Code\advent-of-code\AdventOfCode\Day3\obj\Debug\Day3.pdb
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\bin\Debug\Input
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\bin\Debug\Day3.exe
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\bin\Debug\Day3.pdb
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.csproj.AssemblyReference.cache
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.csproj.SuggestedBindingRedirects.cache
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.csproj.CoreCompileInputs.cache
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.exe
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day3\obj\Debug\Day3.pdb
