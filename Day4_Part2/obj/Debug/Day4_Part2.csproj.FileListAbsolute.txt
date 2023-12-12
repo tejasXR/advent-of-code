@@ -1,0 +1,7 @@
+F:\Documents\Development\Advent of Code\advent-of-code\Day4_Part2\bin\Debug\Input
+F:\Documents\Development\Advent of Code\advent-of-code\Day4_Part2\bin\Debug\Day4_Part2.exe
+F:\Documents\Development\Advent of Code\advent-of-code\Day4_Part2\bin\Debug\Day4_Part2.pdb
+F:\Documents\Development\Advent of Code\advent-of-code\Day4_Part2\obj\Debug\Day4_Part2.csproj.AssemblyReference.cache
+F:\Documents\Development\Advent of Code\advent-of-code\Day4_Part2\obj\Debug\Day4_Part2.csproj.CoreCompileInputs.cache
+F:\Documents\Development\Advent of Code\advent-of-code\Day4_Part2\obj\Debug\Day4_Part2.exe
+F:\Documents\Development\Advent of Code\advent-of-code\Day4_Part2\obj\Debug\Day4_Part2.pdb
