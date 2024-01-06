@@ -1,0 +1,7 @@
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day1\bin\Debug\Input
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day1\bin\Debug\Day1.exe
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day1\bin\Debug\Day1.pdb
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day1\obj\Debug\Day1.csproj.AssemblyReference.cache
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day1\obj\Debug\Day1.csproj.CoreCompileInputs.cache
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day1\obj\Debug\Day1.exe
+C:\Users\tejas\Documents\Personal Projects\Advent of Code\advent-of-code\Day1\obj\Debug\Day1.pdb

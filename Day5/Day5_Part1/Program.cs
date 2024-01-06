@@ -10,14 +10,15 @@ namespace Day5_Part1
     {
         private const string InputFileName = "Input";
         private const string SEEDS = "seeds:";
-        private const string SEED_TO_SOIL = "seed-to-soil map:";
-        private const string SOIL_TO_FERTILIZER = "soil-to-fertilizer map:";
+        private const string SEED_TO_SOIL_MAPKEY = "seed-to-soil map:";
+        private const string SOIL_TO_FERTILIZER_MAPKEY = "soil-to-fertilizer map:";
         
         public static void Main(string[] args)
         {
-            var input = File.ReadAllLines(InputFileName);
-            List<double> seeds = new List<double>();
+            string[] input = File.ReadAllLines(InputFileName);
+            List<int> seeds = new List<int>();
             
+            // Get seeds
             foreach (var line in input)
             {
                 if (!line.Contains(SEEDS)) continue;
@@ -26,29 +27,50 @@ namespace Day5_Part1
                 var seedNumbers = line.Substring(index + SEEDS.Length + 1);
                 var seedStrings = seedNumbers.Split(null);
 
-                seeds.AddRange(seedStrings.Select(double.Parse));
-            }
-            
-            // create a dataTable
-            ulong rows = (ulong)seeds.Max();
-            var columns = 8;
+                seeds.AddRange(seedStrings.Select(int.Parse));
 
-            string[,] array = new string[columns, rows];
-            
-            /*DataTable dataTable = new DataTable("Almanac")
-            {
-                Columns = { "SEED", "SOIL", "FERTILIZER", "WATER", "LIGHT", "TEMPERATURE", "HUMIDITY", "LOCATION" },
-            };
-            
-            for (int j = 0; j <= rows; j++)
-            {
-                dataTable.Rows.Add();
+                break;
             }
 
-            for (int i = 0; i < dataTable.Columns.Count; i++)
+            // Get seed-to-soil strings
+            var seedToSoilStringArray = GetMappedStrings(input, SEED_TO_SOIL_MAPKEY);
+        }
+
+        public static string[] GetMappedStrings(string[] fileInput, string mapKey)
+        {
+            List<string> mappedStrings = new List<string>();
+            int startIndex = 0;
+            for (int i = 0; i < fileInput.Length; i++)
             {
-                dataTable
-            }*/
+                if (fileInput[i].Contains(mapKey))
+                    startIndex = i;
+            }
+
+            var readIndex = startIndex + 1;
+            while (!string.IsNullOrEmpty(fileInput[readIndex]))
+            {
+                mappedStrings.Add(fileInput[readIndex]);
+                readIndex++;
+            }
+
+            return mappedStrings.ToArray();
+        }
+
+        public static string FindStringWithinSourceRange(string[] stringConversions, int sourceNumber)
+        {
+            foreach (var conversion in stringConversions)
+            {
+                var splitConversion = conversion.Split(null);
+                var intConversion = splitConversion.Select(int.Parse);
+
+            }
+
+
+        }
+
+        public static void ConvertSourceNumberToDestinationNumber()
+        {
+
         }
     }
 }
